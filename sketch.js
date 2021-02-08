@@ -1,18 +1,42 @@
 
+var cat, catImage, catRunning;
+var mouse, mouseStanding, mouseSword;
+var background, backgroundImage;
+
 function preload() {
-    //load the images here
+    catImage = loadImage("cat1.png");
+    catRunning = loadAnimation("cat2.png","cat3.png")
+    mouseStanding = loadImage("mouse1.png");
+    mouseSword = loadImage("mouse4.png");
+    backgroundImage = loadImage("garden.png");
 }
 
 function setup(){
     createCanvas(1000,800);
-    //create tom and jerry sprites here
+    cat = createSprite(900,700,20,30);
+    cat.addImage(catImage);
+
+    mouse = createSprite(400,700,10,20);
+    mouse.addImage(mouseStanding);
+
+    background = createSprite(1000,800);
+    background.addImage(backgroundImage);
 
 }
 
 function draw() {
 
     background(255);
-    //Write condition here to evalute if tom and jerry collide
+    
+    if(cat.x - mouse.x < mouse.width/2 + cat.width/2
+        && mouse.x - cat.x < mouse.width/2 + cat.width/2
+        && cat.y - mouse.y < mouse.height/2 + cat.height/2
+        && mouse.y - cat.y < mouse.height/2 + cat.height/2){
+        mouse.addImage(mouseSword);
+        cat.velocity = 0;
+    }
+
+    keyPressed();
 
     drawSprites();
 }
@@ -20,6 +44,11 @@ function draw() {
 
 function keyPressed(){
 
+    if(keyCode === LEFT_ARROW){
+        cat.velocity = -5;
+        cat.addAnimation("catRunning",);
+        cat.chageAnimation("catRunning");
+    }
   //For moving and changing animation write code here
 
 
